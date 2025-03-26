@@ -1,9 +1,8 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import React, { useState, useEffect } from 'react';
 
 const LandingPage = () => {
   const targetDate = new Date('2025-10-19T12:00:00').getTime(); // Set to 12 PM
-
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
   function calculateTimeLeft() {
@@ -31,33 +30,46 @@ const LandingPage = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>Our Day</Text>
-      <Text style={styles.countdown}>
-        {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
-      </Text>
-    </View>
+    <ImageBackground 
+      source={{ uri: 'https://thumbs.dreamstime.com/b/tree-love-37616637.jpg' }} 
+      style={styles.background}
+      resizeMode="cover"
+    >
+      <View style={styles.overlay}>
+        <Text style={styles.heading}>Our Day</Text>
+        <Text style={styles.countdown}>
+          {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
+        </Text>
+      </View>
+    </ImageBackground>
   );
 };
 
 export default LandingPage;
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
     flex: 1,
-    backgroundColor: 'white',
     justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: '100%',
+  },
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Adds a semi-transparent overlay for readability
+    padding: 20,
+    borderRadius: 10,
     alignItems: 'center',
   },
   heading: {
     fontSize: 28,
     fontWeight: 'bold',
     marginBottom: 20,
-    color: '#333',
+    color: 'white',
   },
   countdown: {
     fontSize: 32,
     fontWeight: 'bold',
-    color: 'black',
+    color: 'white',
   },
 });
